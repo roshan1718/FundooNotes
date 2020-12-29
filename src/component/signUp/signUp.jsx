@@ -92,8 +92,8 @@ export default class Login extends React.Component {
 
     onSubmit = (event) =>{
         event.preventDefault();
-        console.log("password",this.state.password);
-        console.log("confirm-password",this.state.confirmPassword);
+        console.log("password", this.state.password);
+        console.log("confirm-password", this.state.confirmPassword);
 
         if(this.state.error.errorConfirmPassword ==="" 
             && this.state.error.errorEmail ===""
@@ -109,16 +109,16 @@ export default class Login extends React.Component {
                 password: this.state.password,
                 service: 'advance',
             };
-                user_service.register(userData).then((data) =>{
-                    console.log('data after register',data);
-              }).catch(error=>{
-                    console.log('Error',error);
-              })
-            }else{
+            user_service.register(userData).then((data) =>{
+                    console.log('data after register', data);
+            }).catch(error=>{
+                    console.log('Error', error);
+            })
+            }else {
                 alert("Password not Matching");
             }
         }
-        else{
+        else {
 
             alert("something is missing");
         }
@@ -171,7 +171,7 @@ export default class Login extends React.Component {
                                         <p className="error-msg">{error.errorEmail}</p>
                                     </div>
                                 </div>
-                                <span className="email-text">you can use letters,numbers & periods</span>
+                                <span className="email-text">use letters, numbers & periods</span>
                                 <div className="reg-name reg-password">
                                     <div className="f-name">
                                         <Input

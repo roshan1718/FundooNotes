@@ -35,14 +35,14 @@ export default class Login extends React.Component {
             password: this.state.password
           };
           user_service.login(userData).then((data) =>{
-                console.log('data after login',data);
+                console.log('data after login', data);
           }).catch(error=>{
           })
-      }
+        }
 
 
     render() {
-        const{email,password} = this.state;
+        const{email, password} = this.state;
     return(   
         <div className="body">
             <div className="frame">
@@ -56,6 +56,9 @@ export default class Login extends React.Component {
             </div> 
                 <span className="sign-in">
                     Sign in
+                </span>
+                <span className="fundoo-text">
+                        Continue to Fundoo
                 </span>
                 <Input 
                     className="input" 
