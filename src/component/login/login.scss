@@ -1,89 +1,71 @@
-@mixin  text($size,$width,$lign-height) {
-    font-size: $size;
-    font-weight: $width;
-    line-height: $lign-height;
+.outerCard {
+  width: 40%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50%;
+  border: 1px solid #dadce0;
+  border-radius: 11px;
+  margin: auto;
+  margin-top: 5%;
 }
-@mixin  color($color) {
-    color: $color;
+.fundooAlign {
+  display: flex;
+  justify-content: center;
+  font-size: xx-large;
+  margin-top: 2%;
 }
-.body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+.Fcolor {
+  color: rgb(66, 133, 244);
 }
-.frame{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
-    width: 390px;
-    height: 450px;
-    border: 1px #DADCE0 solid;
-    border-radius: 10px;
-    position: relative;
+.font1 {
+  margin-top: -5%;
+  font-weight: bold;
+  color: black;
+  font-size: 50px;
 }
-.fundoo{
-    @include text(xx-large,640,1.5);
+.font2 {
+  margin-top: -5%;
+  color: black;
+  font: 30px Arial, sans-serif;
 }
-.f
-{
-    @include color(#4285F4);
+.textFiled {
+  margin-top: 2%;
 }
-.u
-{
-    @include color(#DB4437);
+.inputEmail {
+  width: fit-content;
 }
-.n
-{
-    @include color(#F4B400);
+.inputPass {
+  width: 100%;
+  margin-top: 10%;
 }
-.d
-{    
-    @include color (#4285F4);
+.textWidth {
+  width: 90%;
 }
-.o
-{
-    @include color( #0F9D58);
+.errorMessage {
+  color: #e92a44;
 }
-
-.fundoo-text{
-    @include text(17px,400,1.5);
-    color: #202124;
-    letter-spacing: .1px;
+.links {
+  display: flex;
+  justify-content: space-between;
+  font-size: x-large;
+  color: rgb(4, 4, 253);
 }
-.sign-in{
-    margin: 17px 0px;
-    font-family: 'Google Sans','Noto Sans Myanmar UI',arial,sans-serif;
-    @include text(24px,400,1.3333);
+.forgetText {
+  flex-direction: row-reverse;
+  margin-left: 20px;
 }
-.input{
-    width: 340px;
-    height: 25px;
-    margin: 26px !important;
+.loginbtn {
+  height: 40px;
+  width: 50%;
+  background-color: rgb(39, 103, 206);
+  border-color: #dadce0;
+  color: aliceblue;
+  font-size: 20px;
 }
-.create-account{
-    position: absolute;
-    bottom: 40px;
-    left: 35px;
-    font-weight: 500;
-    color: #297CE9;
-    cursor: pointer;
-}
-.login{
-    position: absolute;
-    bottom: 40px;
-    right: 35px;
-    width: 70px;
-    height: 35px;
-    border-radius: 4px;
-    border: 0;
-    font-size: 14px;
-    font-weight: 550;
-    color: #e7eaee;
-    background-color: #1A73E8;
-    outline: none;
-}
-.login:hover{
-    background-color: #0d64ce;
-} 
+// @media screen and (max-width: 600px) {
+//   .loginCard {
+//     border: none;
+//   }
+// }

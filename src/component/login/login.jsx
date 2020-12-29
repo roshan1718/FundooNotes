@@ -1,88 +1,115 @@
 import React from "react";
-import { Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Input, Button } from "antd";
+import { Link } from "react-router-dom";
 
 import "./login.scss";
-import user_service from '../../services/userService';
-
+import UserService from "../../services/userService";
 
 export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: null,
+      password: null,
 
-    constructor(props)
-    {
-        super(props)
-        this.state={
-            email:'',
-            password:''
-        }
+      formErrors: {
+        errorEmail: "",
+        errorPassword: "",
+      },
+    };
+  }
+
+  onValueChange = (e) => {
+    let emailValidation = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+    let inputs = this.state.formErrors;
+
+    switch (e.target.name) {
+      case "email":
+        inputs.errorEmail =
+          emailValidation.test(e.target.value) === true
+            ? ""
+            : "Enter Valid email";
+        break;
+      case "password":
+        inputs.errorPassword =
+          passwordValidation.test(e.target.value) === true
+            ? ""
+            : "Enter Valid password";
+        break;
+
+      default:
+        break;
     }
+  };
 
-    ChangeEmail = (e) => {
-        this.setState({
-            email:e.target.value
-        },() => {console.log(this.state);})         
-      }
+  onSubmit = (event) => {
+    event.preventDefault();
+    let userData = {
+      email: this.state.email,
+      password: this.state.password,
+      cartId: "",
+    };
+    UserService.login(userData).then((data) => {
+      console.log(data);
+    });
+  };
 
-      ChangePassword = (e) => {
-        this.setState({
-            password:e.target.value
-        },() => {console.log(this.state);})         
-      }
-
-      onLogin = () =>{
-        let userData = {
-            email: this.state.email,
-            password: this.state.password
-          };
-          user_service.login(userData).then((data) =>{
-                console.log('data after login', data);
-          }).catch(error=>{
-          })
-        }
-
-
-    render() {
-        const{email, password} = this.state;
-    return(   
-        <div className="body">
-            <div className="frame">
-            <div className="fundoo">
-                <span className="f">F</span>
-                <span className="u">u</span>
-                <span className="n">n</span>
-                <span className="d">d</span>
-                <span className="o">o</span>
-                <span className="u">o</span>
-            </div> 
-                <span className="sign-in">
-                    Sign in
-                </span>
-                <span className="fundoo-text">
-                        Continue to Fundoo
-                </span>
-                <Input 
-                    className="input" 
-                    label="Email" 
-                    placeholder="Email" 
-                    value={email}
-                    onChange={this.ChangeEmail}/>
-                <Input
-                    className="input"
-                    label="Password"
-                    placeholder="Password" 
-                    autoComplete="current-password"
-                    value={password}
-                    onChange={this.ChangePassword}/>
-                <div className="create-account">
-                <Link to="/signUp">Create account</Link>
-                </div>
-                <button 
-                className="login"
-                onClick={this.onLogin}>
-                    Login
-                </button>
-            </div>
-        </div>   
-        )
-    }
+  render() {
+    return (
+      <div className="outerCard">
+        <div className="fundooAlign">
+          <div className="Fcolor">F</div>
+          <div className="Fcolor">u</div>
+          <div className="Fcolor">n</div>
+          <div className="Fcolor">d</div>
+          <div className="Fcolor">o</div>
+          <div className="Fcolor">o</div>
+        </div>
+        <div className="font1">
+          <h5>Sign In</h5>
+        </div>
+        <div className="font2">
+          <h7>Continue to Fundoo</h7>
+        </div>
+        <div className="textFiled">
+          <div className="inputEmail">
+            <Input label="E-mail" name="email" onChange={this.onValueChange} />
+            <p className="errorMessage">{this.state.formErrors.errorEmail}</p>
+          </div>
+          <div className="inputPass">
+            <Input.Password
+              placeholder="Enter password"
+              label="Password"
+              type="password"
+              name="password"
+              onChange={this.onValueChange}
+            />
+            <p className="errorMessage">
+              {this.state.formErrors.errorPassword}
+            </p>
+          </div>
+        </div>
+        <br />
+        <Button className="loginbtn" type="submit" onClick={this.onSubmit}>
+          Login
+        </Button>
+        <div className="links">
+          <div>
+            <Link to="/signup">
+              <h6>Create account</h6>
+            </Link>
+          </div>
+          <div className="forgetText">
+            <Link to="/forgetPass">
+              <h6>Forget password ?</h6>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
