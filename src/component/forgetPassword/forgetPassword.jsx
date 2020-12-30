@@ -30,15 +30,18 @@ export default class forgetPassword extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    const email = this.state.email;
-    console.log(email);
-    UserService.forgetPass(email)
-      .then((data) => {
-        console.log("", email);
-      })
-      .catch((error) => {
-        console.log(error.response);
+    let userData = {
+      email: this.state.email,
+    };
+    if (this.state.formErrors.errorEmail !== "") {
+      console.log("Input Fields are not properly filled");
+    } else {
+      UserService.forgetPass(userData).then((data) => {
+        console.log(data);
+      }).catch((error) => {
+        console.log("Invalid Entry",error);
       });
+    }
   };
 
   render() {

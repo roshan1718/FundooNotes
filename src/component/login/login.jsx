@@ -53,9 +53,18 @@ export default class Login extends React.Component {
       password: this.state.password,
       cartId: "",
     };
-    UserService.login(userData).then((data) => {
-      console.log(data);
-    });
+    if (
+      this.state.formErrors.errorEmail !== "" ||
+      this.state.formErrors.errorPassword !== ""
+    ) {
+      console.log("Input Fields are not properly filled");
+    } else {
+      UserService.login(userData).then((data) => {
+        console.log(data);
+      }).catch((error) => {
+        console.log("Invalid Entry",error);
+      });
+    }
   };
 
   render() {

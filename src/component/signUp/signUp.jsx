@@ -84,12 +84,14 @@ export default class Login extends React.Component {
       this.state.formErrors.errorPassword !== "" ||
       this.state.formErrors.errorConfirmPassword !== ""
     ) {
-      console.log("Input Field are not properly filled");
+      console.log("Input Fields are not properly filled");
     } else if (this.state.password !== this.state.confirmPassword) {
       console.log("Password not match");
     } else {
       UserService.register(userData).then((data) => {
         console.log(data);
+      }).catch((error) => {
+        console.log("Invalid Entry",error);
       });
     }
   };
