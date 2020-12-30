@@ -80,7 +80,8 @@ export default class Login extends React.Component {
             <Input 
               placeholder="UserName"
               name="email" 
-            onChange={this.onValueChange} />
+              onChange={this.onValueChange} 
+            />
             <p className="errorMessage">{this.state.formErrors.errorEmail}</p>
           </div>
           <div className="inputPass">

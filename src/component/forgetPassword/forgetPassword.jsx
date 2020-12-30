@@ -1,20 +1,22 @@
 import React from "react";
 import { Input, Button } from "antd";
+import { Link } from "react-router-dom";
 
 import "./forgetPassword.scss";
-// import { Link } from "react-router-dom";
+import UserService from "../../services/userService";
 
 export default class forgetPassword extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email : null,
+      email: null,
 
       formErrors: {
-        errorEmail : "",
+        errorEmail: "",
       },
     };
   }
+
   onValueChange = (e) => {
     let emailValidation = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -23,9 +25,20 @@ export default class forgetPassword extends React.Component {
     });
     let inputs = this.state.formErrors;
     inputs.errorEmail =
-        emailValidation.test(e.target.value) === true
-            ? ""
-            : "Enter valid email";
+      emailValidation.test(e.target.value) === true ? "" : "Enter valid email";
+  };
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    const email = this.state.email;
+    console.log(email);
+    UserService.forgetPass(email)
+      .then((data) => {
+        console.log("", email);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   };
 
   render() {
@@ -48,20 +61,25 @@ export default class forgetPassword extends React.Component {
             className="fpinput"
             id="outlined-basic"
             placeholder="Enter Email id"
+            name="email"
+            type="email"
             required
             onChange={this.onValueChange}
           />
           <span className="errorMessage">
             {this.state.formErrors.errorEmail}
           </span>
-
         </div>
         <div className="button">
           <div>
-            <Button className="backbtn">Back</Button>
+            <Link to={"/signUp"}>
+              <Button className="backbtn"> Back </Button>
+            </Link>
           </div>
           <div>
-            <Button className="nextbtn">Next</Button>
+            <Button className="nextbtn" type="submit" onClick={this.onSubmit}>
+              Next
+            </Button>
           </div>
         </div>
       </div>

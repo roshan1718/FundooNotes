@@ -8,14 +8,19 @@ class UserService{
     }
 
     login(data){
-       let url = process.env.REACT_APP_BASE_URL +'/user/login';
-       return this.axios_service.post(url,data);
+       let url = process.env.REACT_APP_BASE_URL + "/user/login";
+       return this.axios_service.post(url, data);
     }
 
-    register(data)
-    {
-        let url = process.env.REACT_APP_BASE_URL +'/user/userSignUp';
-        return this.axios_service.post(url,data);
+    register(data){
+        let url = process.env.REACT_APP_BASE_URL + "/user/userSignUp";
+        return this.axios_service.post(url, data);
+    }
+
+    forgetPass(data){
+        console.log('.........', data);
+        let url = process.env.REACT_APP_BASE_URL + "/user/reset";
+        return this.axios_service.post(url, data);
     }
 
 }
