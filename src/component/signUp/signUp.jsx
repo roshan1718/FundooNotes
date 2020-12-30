@@ -97,7 +97,7 @@ export default class Login extends React.Component {
           <h5>Create your Fundoo Account</h5>
         </div>
         <Form>
-          <div className="Passwordfield">
+          <div className="textfield">
             <div>
               <Input
                 className="textSize"
@@ -109,6 +109,9 @@ export default class Login extends React.Component {
                 required
                 onChange={this.onValueChange}
               />
+              <span className="errorMessage">
+                {this.state.formErrors.errorFirstName}
+              </span>
             </div>
             <div>
               <Input
@@ -120,9 +123,12 @@ export default class Login extends React.Component {
                 required
                 onChange={this.onValueChange}
               />
+              <span className="errorMessage">
+                {this.state.formErrors.errorLastName}
+              </span>
             </div>
           </div>
-          <div className="Passwordfield">
+          <div className="emfield">
             <Input
               className="emailFiled"
               placeholder="Email"
@@ -134,14 +140,13 @@ export default class Login extends React.Component {
               onChange={this.onValueChange}
             />
           </div>
-
-          <div className="flex">
+          <div className="flex1">
             <span className="errorMessage">
               {this.state.formErrors.errorEmail}
             </span>
           </div>
-
-          <div className="Passwordfield">
+          <br></br>
+          <div className="textfield">
             <div>
               <Input
                 className="textSize"
@@ -153,25 +158,24 @@ export default class Login extends React.Component {
                 required
                 onChange={this.onValueChange}
               />
+              <span className="errorMessage">
+                {this.state.formErrors.errorPassword}
+              </span>
             </div>
             <div>
               <Input
                 className="textSize"
                 placeholder="Confirm Password"
                 id="outlined-basic"
-                variant="outlined"
-                size="small"
                 name="confirmPassword"
                 type="password"
                 required
                 onChange={this.onValueChange}
               />
+              <span className="errorMessage">
+                {this.state.formErrors.errorConfirmPassword}
+              </span>
             </div>
-          </div>
-          <div className="flex">
-            <span className="errorMessage">
-              {this.state.formErrors.errorPassword}
-            </span>
           </div>
 
           <div className="buttons">

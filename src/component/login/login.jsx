@@ -77,7 +77,10 @@ export default class Login extends React.Component {
         </div>
         <div className="textFiled">
           <div className="inputEmail">
-            <Input label="E-mail" name="email" onChange={this.onValueChange} />
+            <Input 
+              placeholder="UserName"
+              name="email" 
+            onChange={this.onValueChange} />
             <p className="errorMessage">{this.state.formErrors.errorEmail}</p>
           </div>
           <div className="inputPass">
@@ -88,9 +91,9 @@ export default class Login extends React.Component {
               name="password"
               onChange={this.onValueChange}
             />
-            <p className="errorMessage">
+            <span className="errorMessage">
               {this.state.formErrors.errorPassword}
-            </p>
+            </span>
           </div>
         </div>
         <br />
