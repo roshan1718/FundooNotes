@@ -77,9 +77,21 @@ export default class Login extends React.Component {
       password: this.state.password,
       service: "advance",
     };
-    UserService.register(userData).then((data) => {
-      console.log(data);
-    });
+    if (
+      this.state.formErrors.errorFirstName !== "" ||
+      this.state.formErrors.errorLastName !== "" ||
+      this.state.formErrors.errorEmail !== "" ||
+      this.state.formErrors.errorPassword !== "" ||
+      this.state.formErrors.errorConfirmPassword !== ""
+    ) {
+      console.log("Input Field are not properly filled");
+    } else if (this.state.password !== this.state.confirmPassword) {
+      console.log("Password not match");
+    } else {
+      UserService.register(userData).then((data) => {
+        console.log(data);
+      });
+    }
   };
 
   render() {
