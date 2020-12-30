@@ -1,140 +1,171 @@
-.register{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.outerCard {
+  width: 40%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 50%;
+  border: 1px solid #dadce0;
+  border-radius: 11px;
+  margin-top: 5%;
 }
-.register-frame{
-    display: flex;
-    flex-direction: column;
-    margin-top: 100px;
-    width: 520px;
-    height: 465px;
-    padding: 10px;
-    border: 1px #DADCE0 solid;
-    border-radius: 10px;
-}
-.reg-fundoo
-{
-    font-size: x-large;
-    font-weight: 640;
-    line-height: 1.5;
-    display: flex;
-    align-content: flex-start;
-    margin: 20px 30px 15px 30px;
-}
-.reg-fundoo-account{
-    margin-bottom: 30px;
-    font-size: x-large;
-    font-family: 'Google Sans',arial,sans-serif;
-    display: flex;
-    align-content: flex-start;
-}
-.reg-input-body{
-    width: 100%;
-    height: auto;
-    display: flex;
-}
-.input-info{
-    display:flex;
-    flex-direction: column;
-    flex-basis: 65%;
-    padding: 0px 0px 0px 30px;
 
+.InputPanel {
+  //border: 1px solid #dadce0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  //margin-top: 31px;
+  height: 73px;
 }
-.reg-name{
-    width: 100%;
-    height: 55px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 2px;
+
+.Passwordfield {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.input-name{
-    width: 215px;
-    height: 25px;
+
+.InputPanel1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.f-name{
-    display: flex;
-    flex-direction: column;
+
+.FontSerif {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  color: rgb(81, 94, 129);
 }
-.error-msg{
-    font-size: 12px;
-    margin: 0;
-    display: flex;
-    color: #ff1414;
-    font-weight: 400;
+
+.font {
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: black;
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: 26px;
 }
-.reg-email{
-    width: 100%;
-    height: 25px;
+.text {
+  height: 5px;
+  width: 20px;
 }
-.reg-email-div{
-    margin-top: 20px;
+
+.fundooTextAlign {
+  display: flex;
+  margin-top: 5%;
 }
-.email-text{
-    display: flex;
-    align-items: flex-start;
-    font-size: small;
-    font-weight: 400;
-    text-align: start;
+
+.Fcolor {
+  font-size: xx-large;
+  color: rgb(66, 133, 244);
 }
-.reg-password{
-    margin-top: 20px;
+
+.flex {
+  display: flex;
+  height: 44px;
 }
-.password-text{
-    display: flex;
-    align-items: flex-start;
+
+.textSize {
+  width: 100%;
+  padding: 10px;
 }
-img{
-    width: 240px;
+
+.emailFiled {
+  width: 400px;
+  padding: 10px;
+  margin-top: 5%;
 }
-.direction-div{
-    margin-top: 35px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+
+.errorMessage {
+  color: red;
+  font-size: 0.75em;
+  display: flex;
 }
-.next{
-    width: 80px;
-    height: 33px;
-    border-radius: 5px;
-    border: none;
-    background: #1A73E8;
-    font-size: medium;
-    color: white;
-    font-weight: 300;
-    outline: none;
+.buttons {
+  display: flex;
+  margin-bottom: 5%;
+  justify-content: space-between;
 }
-.signin{
-    font-size: medium;
-    font-weight: 600;
-    color: #4B82E9;
-    cursor: pointer;
+
+.links {
+  margin-top: -5%;
+  font-size: x-large;
+  color: rgb(4, 4, 253);
 }
-.next:hover{
-    background-color: #0d64ce;
+
+.loginbtn {
+  height: 40px;
+  width: 50%;
+  background-color: rgb(39, 103, 206);
+  border-color: #dadce0;
+  color: aliceblue;
+  font-size: 20px;
 }
-@media(max-width:730px){
-    .input-info{
-        flex-basis: 100%;
-        padding: 0px 30px 0px 30px;
-    }
-    .register-frame{
-        width: 90%;
-        height: auto;
-    }
-    .reg-name{
-        height: 134px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    .input-name{
-        width: auto;
-    }
-}
-@media(max-width:410px){
-    .reg-fundoo{
-        display: block;
-    }
-} 
+//   /* ------------------ media Quiery ---------------------------- */
+
+//   @media screen and (max-width: 640px) {
+//     .RegistrationBody {
+//       border: 0px;
+//       display: flex;
+//       flex-direction: column;
+//       width: 100%;
+//       justify-content: center;
+//       align-items: center;
+//       padding-top: 0px;
+//       height: 640px;
+//     }
+
+//     .fundooTextAlign {
+//       justify-content: center;
+//     }
+
+//     .font {
+//       justify-content: center;
+//     }
+
+//     .InputPanel {
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       height: 122px;
+//     }
+
+//     .InputPanel1 {
+//       display: flex;
+//       align-items: center;
+//     }
+
+//     .image {
+//       display: none;
+//     }
+
+//     .textSize {
+//       padding-bottom: 20px;
+//       width: 100%;
+//     }
+
+//     .inputPanelBody {
+//       margin-left: 72px;
+//     }
+
+//     .Passwordfield {
+//       //border: 1px solid #dadce0;
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: space-between;
+//     }
+
+//     .reg-conf-pass {
+//       padding-top: 22px;
+//     }
+
+//     .flex {
+//       display: flex;
+//       justify-content: center;
+//     }
+
+//     .Manipulation {
+//       padding-right: 73px;
+//     }
+//   }
