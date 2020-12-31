@@ -4,6 +4,7 @@ import { Input, Button, Form } from "antd";
 
 import "../signUp/signUp.scss";
 import UserService from "../../services/userService";
+import Snackbar from "../snackbar/snackbar";
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -21,8 +22,22 @@ export default class Login extends React.Component {
         errorPassword: "",
         errorConfirmPassword: "",
       },
+      flag: 0,
+      snackbarStatus: false,
+      text: "",
     };
   }
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({
+      snackbarStatus: false,
+      text: "",
+    });
+  };
+  
   onValueChange = (e) => {
     let nameValidation = /^[A-Z][a-zA-Z]*$/;
     let emailValidation = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -78,21 +93,39 @@ export default class Login extends React.Component {
       service: "advance",
     };
     if (
-      this.state.formErrors.errorFirstName !== "" ||
-      this.state.formErrors.errorLastName !== "" ||
-      this.state.formErrors.errorEmail !== "" ||
-      this.state.formErrors.errorPassword !== "" ||
-      this.state.formErrors.errorConfirmPassword !== ""
+      this.state.flag === 1 ||
+      this.state.formErrors.errorFirstName === "" ||
+      this.state.formErrors.errorLastName === "" ||
+      this.state.formErrors.errorEmail === "" ||
+      this.state.formErrors.errorPassword === "" ||
+      this.state.formErrors.errorConfirmPassword === ""
     ) {
-      console.log("Input Fields are not properly filled");
+      this.setState({
+        snackbarStatus: true,
+        text: "Input Fields are not properly filled",
+      });
     } else if (this.state.password !== this.state.confirmPassword) {
       console.log("Password not match");
-    } else {
-      UserService.register(userData).then((data) => {
-        console.log(data);
-      }).catch((error) => {
-        console.log("Invalid Entry",error);
+      this.setState({
+        snackbarStatus: true,
+        text: "Password not match",
       });
+    } else {
+      UserService.register(userData)
+        .then((data) => {
+          console.log(data);
+          this.setState({
+            snackbarStatus: true,
+            text: "Register succesfully",
+          });
+        })
+        .catch((error) => {
+          console.log("Invalid Entry", error);
+          this.setState({
+            snackbarStatus: true,
+            text: "Invalid Entry",
+          });
+        });
     }
   };
 
@@ -191,7 +224,6 @@ export default class Login extends React.Component {
               </span>
             </div>
           </div>
-
           <div className="buttons">
             <Link to="/" className="links">
               <h6>Sign in instead</h6>
@@ -201,6 +233,11 @@ export default class Login extends React.Component {
             </Button>
           </div>
         </Form>
+        <Snackbar
+          text={this.state.text}
+          openStatus={this.state.snackbarStatus}
+          closeStatus={this.handleClose}
+        ></Snackbar>
       </div>
     );
   }

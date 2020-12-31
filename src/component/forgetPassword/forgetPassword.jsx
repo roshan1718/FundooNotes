@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./forgetPassword.scss";
 import UserService from "../../services/userService";
+import Snackbar from "../snackbar/snackbar";
 
 export default class forgetPassword extends React.Component {
   constructor(props) {
@@ -14,8 +15,21 @@ export default class forgetPassword extends React.Component {
       formErrors: {
         errorEmail: "",
       },
+      flag: 0,
+      snackbarStatus: false,
+      text: "",
     };
   }
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({
+      snackbarStatus: false,
+      text: "",
+    });
+  };
 
   onValueChange = (e) => {
     let emailValidation = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -35,11 +49,23 @@ export default class forgetPassword extends React.Component {
     };
     if (this.state.formErrors.errorEmail !== "") {
       console.log("Input Fields are not properly filled");
+      this.setState({
+        snackbarStatus: true,
+        text: "Input Fields are not properly filled",
+      });
     } else {
       UserService.forgetPass(userData).then((data) => {
         console.log(data);
+        this.setState({
+          snackbarStatus: true,
+          text: "Set password link sent to you registered email, please check.",
+        });
       }).catch((error) => {
         console.log("Invalid Entry",error);
+        this.setState({
+          snackbarStatus: true,
+          text: "Invalid Entry",
+        });
       });
     }
   };
@@ -85,7 +111,13 @@ export default class forgetPassword extends React.Component {
             </Button>
           </div>
         </div>
+        <Snackbar
+          text={this.state.text}
+          openStatus={this.state.snackbarStatus}
+          closeStatus={this.handleClose}
+        ></Snackbar>
       </div>
+      
     );
   }
 }

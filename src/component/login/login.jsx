@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import "./login.scss";
 import UserService from "../../services/userService";
+import Snackbar from "../snackbar/snackbar";
+
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -18,6 +20,17 @@ export default class Login extends React.Component {
       },
     };
   }
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({
+      snackbarStatus: false,
+      text: "",
+    });
+  };
+  
 
   onValueChange = (e) => {
     let emailValidation = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -53,16 +66,28 @@ export default class Login extends React.Component {
       password: this.state.password,
       cartId: "",
     };
-    if (
-      this.state.formErrors.errorEmail !== "" ||
-      this.state.formErrors.errorPassword !== ""
+    if ( 
+      this.state.formErrors.errorEmail === "" ||
+      this.state.formErrors.errorPassword === ""
     ) {
       console.log("Input Fields are not properly filled");
+      this.setState({
+        snackbarStatus: true,
+        text: "Input Fields are not properly filled",
+      });
     } else {
       UserService.login(userData).then((data) => {
         console.log(data);
+        this.setState({
+          snackbarStatus: true,
+          text: "Login successfully",
+        });
       }).catch((error) => {
         console.log("Invalid Entry",error);
+        this.setState({
+          snackbarStatus: true,
+          text: "Unauthorized user ",
+        });
       });
     }
   };
@@ -110,6 +135,11 @@ export default class Login extends React.Component {
         <Button className="loginbtn" type="submit" onClick={this.onSubmit}>
           Login
         </Button>
+        <Snackbar
+          text={this.state.text}
+          openStatus={this.state.snackbarStatus}
+          closeStatus={this.handleClose}
+        ></Snackbar>
         <div className="links">
           <div>
             <Link to="/signup">
