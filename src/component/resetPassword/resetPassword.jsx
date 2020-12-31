@@ -1,7 +1,8 @@
 import React from "react";
 import "./resetPassword.scss";
 import { Input, Button } from "antd";
-//import { Link } from "react-router-dom";
+import UserService from "../../services/userService";
+import Snackbar from "../snackbar/snackbar";
 
 export default class resetPassword extends React.Component {
   constructor(props) {
@@ -14,8 +15,21 @@ export default class resetPassword extends React.Component {
         errorPassword: "",
         errorConfirmPassword: "",
       },
+      flag: 0,
+      snackbarStatus: false,
+      text: "",
     };
   }
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({
+      snackbarStatus: false,
+      text: "",
+    });
+  };
 
   onValueChange = (e) => {
     let passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -40,6 +54,45 @@ export default class resetPassword extends React.Component {
 
       default:
         break;
+    }
+  };
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    let userData = {
+      email: this.state.email,
+    };
+    if (this.state.formErrors.errorEmail !== "") {
+      console.log("Input Fields are not properly filled");
+      this.setState({
+        snackbarStatus: true,
+        text: "Input Fields are not properly filled",
+      });
+    } else if (
+      this.state.formErrors.errorPassword !==
+      this.state.formErrors.errorConfirmPassword
+    ) {
+      console.log("Password not match");
+      this.setState({
+        snackbarStatus: true,
+        text: "Password mot match",
+      });
+    } else {
+      UserService.resetPass(userData)
+        .then((data) => {
+          console.log(data);
+          this.setState({
+            snackbarStatus: true,
+            text: "New password change successfully",
+          });
+        })
+        .catch((error) => {
+          console.log("Invalid Entry", error);
+          this.setState({
+            snackbarStatus: true,
+            text: "Invalid Entry",
+          });
+        });
     }
   };
 
@@ -86,9 +139,16 @@ export default class resetPassword extends React.Component {
             </span>
           </div>
           <div className="rpbutton">
-            <Button className="resetbtn">Reset</Button>
+            <Button className="resetbtn" type="submit" onClick={this.onSubmit}>
+              Reset
+            </Button>
           </div>
         </div>
+        <Snackbar
+          text={this.state.text}
+          openStatus={this.state.snackbarStatus}
+          closeStatus={this.handleClose}
+        ></Snackbar>
       </div>
     );
   }
