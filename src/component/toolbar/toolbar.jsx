@@ -7,19 +7,29 @@ import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Menu } from "antd";
+import clsx from "clsx";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 import {
   TrademarkOutlined,
   MenuOutlined,
   MoreOutlined,
   SearchOutlined,
+  DropboxOutlined,
+  DeleteOutlined,
+  SnippetsOutlined,
+  EditOutlined,
+  NotificationOutlined
 } from "@ant-design/icons";
 import "../toolbar/toolbar.scss";
 
+const drawerWidth = 240;
+
 const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    backgroundColor: "white",
-    color: "black",
-  },
   grow: {
     flexGrow: 1,
   },
@@ -59,6 +69,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  listIcon:{
+    display: 'flex',
+    flexDirection: 'column'
+  },
   inputRoot: {
     color: "inherit",
   },
@@ -84,57 +98,135 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: 36,
+  },
+  hide: {
+    display: "none",
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: "nowrap",
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: "hidden",
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing(9) + 1,
+    },
+  },
+  toolbar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    backgroundColor: "white",
+    color:'#646868',
+    padding: theme.spacing(0, 1),
+    paddingLeft: "16px",
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
 }));
 
 export default function MiniDrawer() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
+  const [open, setOpen] = React.useState(false);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleDrawerOpen = () => {
+    setOpen(!open);
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleDrawerClose= () => {
+    setOpen(false);
+  };
+
   const menuId = "primary-search-account-menu";
   const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMenu = (
+
+  const renderMobileMenu = (
     <Menu
-      anchorEl={anchorEl}
+      anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
+      id={mobileMenuId}
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Notes</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Reminder</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Edit table</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Archive</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Trash</MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <TrademarkOutlined />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
     </Menu>
   );
+
   return (
-    <div className={classes.grow}>
-      <AppBar position="static">
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={clsx(classes.appBar)}>
         <Toolbar className={classes.toolbar}>
-          <IconButton edge="start" color="inherit" aria-label="open drawer">
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+          >
             <MenuOutlined />
           </IconButton>
           <img
@@ -184,7 +276,50 @@ export default function MiniDrawer() {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMenu}
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+      >
+        <div className={classes.toolbar}></div>
+        <List
+          onMouseEnter={handleDrawerOpen}
+          onMouseLeave={handleDrawerClose}>
+          <ListItem button key={'Notes'} className="notes">
+            <ListItemIcon>
+            <SnippetsOutlined />
+            </ListItemIcon>
+            <ListItemText primary={'Notes'}/>
+          </ListItem>
+          <ListItem button key={'Remainders'} className="remainder">
+            <ListItemIcon><NotificationOutlined /></ListItemIcon>
+            <ListItemText primary={'Remainders'}/>
+          </ListItem>
+          <ListItem button key={'Editlabels'} className="editlabels">
+            <ListItemIcon><EditOutlined /></ListItemIcon>
+            <ListItemText primary={'Edit labels'}/>
+          </ListItem>
+          <ListItem button key={'Archive'} className="archive">
+            <ListItemIcon><DropboxOutlined /></ListItemIcon>
+            <ListItemText primary={'Archive'}/>
+          </ListItem>
+          <ListItem button key={'Trash'} className="trash">
+            <ListItemIcon><DeleteOutlined /></ListItemIcon>
+            <ListItemText primary={'Trash'}/>
+          </ListItem>
+        </List>
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+      </main>
     </div>
   );
 }
