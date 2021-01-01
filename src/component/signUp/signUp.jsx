@@ -140,7 +140,7 @@ export default class Login extends React.Component {
           <div className="Fcolor">o</div>
           <div className="Fcolor">o</div>
         </div>
-        <div className="font">
+        <div className="textFont">
           <h5>Create your Fundoo Account</h5>
         </div>
         <Form>
@@ -162,7 +162,7 @@ export default class Login extends React.Component {
             </div>
             <div>
               <Input
-                className="textSize"
+                className="textSize1"
                 placeholder="LastName"
                 id="outlined-basic"
                 name="lastName"
@@ -211,7 +211,7 @@ export default class Login extends React.Component {
             </div>
             <div>
               <Input
-                className="textSize"
+                className="textSize1"
                 placeholder="Confirm Password"
                 id="outlined-basic"
                 name="confirmPassword"

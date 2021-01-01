@@ -78,6 +78,7 @@ export default class Login extends React.Component {
     } else {
       UserService.login(userData).then((data) => {
         console.log(data);
+        localStorage.setItem('token', data.data.id)
         this.setState({
           snackbarStatus: true,
           text: "Login successfully",
@@ -110,18 +111,17 @@ export default class Login extends React.Component {
           <h7>Continue to Fundoo</h7>
         </div>
         <div className="textFiled">
-          <div className="inputEmail">
-            <Input 
+          <div>
+            <Input className="inputEmail"
               placeholder="UserName"
               name="email" 
               onChange={this.onValueChange} 
             />
             <p className="errorMessage">{this.state.formErrors.errorEmail}</p>
           </div>
-          <div className="inputPass">
-            <Input.Password
-              placeholder="Enter password"
-              label="Password"
+          <div>
+          <Input className="inputEmail"  
+              placeholder="password"
               type="password"
               name="password"
               onChange={this.onValueChange}
@@ -131,17 +131,18 @@ export default class Login extends React.Component {
             </span>
           </div>
         </div>
-        <br />
+        <div className="button">
         <Button className="loginbtn" type="submit" onClick={this.onSubmit}>
           Login
         </Button>
+        </div>
         <Snackbar
           text={this.state.text}
           openStatus={this.state.snackbarStatus}
           closeStatus={this.handleClose}
         ></Snackbar>
-        <div className="links">
-          <div>
+        <div>
+          <div className= "regLink">
             <Link to="/signup">
               <h6>Create account</h6>
             </Link>

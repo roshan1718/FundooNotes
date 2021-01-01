@@ -51,7 +51,6 @@ export default class resetPassword extends React.Component {
             ? ""
             : "Enter Valid password";
         break;
-
       default:
         break;
     }
@@ -62,7 +61,7 @@ export default class resetPassword extends React.Component {
     let userData = {
       email: this.state.email,
     };
-    if (this.state.formErrors.errorEmail !== "") {
+    if (this.state.formErrors.errorEmail === "") {
       console.log("Input Fields are not properly filled");
       this.setState({
         snackbarStatus: true,
@@ -81,6 +80,7 @@ export default class resetPassword extends React.Component {
       UserService.resetPass(userData)
         .then((data) => {
           console.log(data);
+          localStorage.setItem('token', data.data.id)
           this.setState({
             snackbarStatus: true,
             text: "New password change successfully",

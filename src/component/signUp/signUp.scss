@@ -9,14 +9,12 @@
   border-radius: 11px;
   margin-top: 5%;
 }
-
-.InputPanel {
-  //border: 1px solid #dadce0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  //margin-top: 31px;
-  height: 73px;
+@media (max-width: 768px) {
+  .outerCard {
+    width: 90%;
+    height: 100%;
+    margin-top: 5%;
+  }
 }
 
 .textfield {
@@ -24,6 +22,18 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.textFont {
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+@media (max-width: 768px) {
+  .textFont {
+    margin-left: 10px;
+    font-size: 15px;
+  }
+}
+
 .emfield {
   display: flex;
 }
@@ -33,33 +43,40 @@
   padding: 10px;
   margin-top: 5%;
 }
+@media (max-width: 768px) {
+  .emailFiled {
+    width: 50%;
+    padding: 10px;
+    margin-left: 20%;
+    margin-top: 2%;
+  }
+}
 
 .textSize {
   width: 89%;
   padding: 10px;
 }
-
-.InputPanel1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+@media (max-width: 768px) {
+  .textSize {
+    width: 100%;
+    padding: 10px;
+    margin-left: 40%;
+    margin-top: -5%;
+  }
 }
 
-.FontSerif {
-  font-family: "Times New Roman", Times, serif;
-  font-weight: bold;
-  color: rgb(81, 94, 129);
+.textSize1 {
+  width: 89%;
+  padding: 10px;
+}
+@media (max-width: 768px) {
+  .textSize1 {
+    margin-left: -60%;
+    margin-top: 30%;
+    width: 100%;
+  }
 }
 
-.font {
-  display: flex;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  color: black;
-  font-weight: bold;
-  font-size: 30px;
-  margin-top: 26px;
-}
 .text {
   height: 5px;
   width: 20px;
@@ -75,16 +92,12 @@
   color: rgb(66, 133, 244);
 }
 
-.flex {
-  display: flex;
-  height: 44px;
-}
-
 .errorMessage {
   color: red;
   font-size: 0.75em;
   display: flex;
 }
+
 .buttons {
   display: flex;
   margin-bottom: 5%;
@@ -93,83 +106,33 @@
 }
 
 .links {
-  margin-top: -5%;
   font-size: x-large;
   color: rgb(4, 4, 253);
+}
+@media (max-width: 768px) {
+  .links {
+    margin-top: -10%;
+    margin-left: 5%;
+    font-size: x-large;
+    color: rgb(4, 4, 253);
+  }
 }
 
 .loginbtn {
   height: 40px;
   width: 50%;
   background-color: rgb(39, 103, 206);
-  border-color: #dadce0;
+  border: none;
   color: aliceblue;
   font-size: 20px;
 }
-//   /* ------------------ media Quiery ---------------------------- */
-
-//   @media screen and (max-width: 640px) {
-//     .RegistrationBody {
-//       border: 0px;
-//       display: flex;
-//       flex-direction: column;
-//       width: 100%;
-//       justify-content: center;
-//       align-items: center;
-//       padding-top: 0px;
-//       height: 640px;
-//     }
-
-//     .fundooTextAlign {
-//       justify-content: center;
-//     }
-
-//     .font {
-//       justify-content: center;
-//     }
-
-//     .InputPanel {
-//       display: flex;
-//       flex-direction: column;
-//       align-items: center;
-//       height: 122px;
-//     }
-
-//     .InputPanel1 {
-//       display: flex;
-//       align-items: center;
-//     }
-
-//     .image {
-//       display: none;
-//     }
-
-//     .textSize {
-//       padding-bottom: 20px;
-//       width: 100%;
-//     }
-
-//     .inputPanelBody {
-//       margin-left: 72px;
-//     }
-
-//     .Passwordfield {
-//       //border: 1px solid #dadce0;
-//       display: flex;
-//       flex-direction: column;
-//       justify-content: space-between;
-//     }
-
-//     .reg-conf-pass {
-//       padding-top: 22px;
-//     }
-
-//     .flex {
-//       display: flex;
-//       justify-content: center;
-//     }
-
-//     .Manipulation {
-//       padding-right: 73px;
-//     }
-//   }
+@media (max-width: 768px) {
+  .loginbtn {
+    height: 30px;
+    width: 40%;
+    font-size: 15px;
+    margin-top: -10px;
+    margin-left: -90px;
+    margin-right: 10px;
+  }
+}

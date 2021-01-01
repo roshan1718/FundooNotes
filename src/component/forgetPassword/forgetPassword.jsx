@@ -110,7 +110,7 @@ export default class forgetPassword extends React.Component {
               Next
             </Button>
           </div>
-        </div>
+          </div>
         <Snackbar
           text={this.state.text}
           openStatus={this.state.snackbarStatus}

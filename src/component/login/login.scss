@@ -10,62 +10,147 @@
   margin: auto;
   margin-top: 5%;
 }
+@media (max-width: 768px) {
+  .outerCard {
+    height: 40%;
+    width: 100%;
+    margin: auto;
+    margin-top: 5%;
+  }
+}
+
 .fundooAlign {
   display: flex;
   justify-content: center;
   font-size: xx-large;
   margin-top: 2%;
 }
+@media (max-width: 768px) {
+  .fundooAlign {
+    margin-top: 10%;
+  }
+}
+
 .Fcolor {
   color: rgb(66, 133, 244);
 }
+
 .font1 {
   margin-top: -5%;
   font-weight: bold;
   color: black;
   font-size: 50px;
 }
+@media (max-width: 768px) {
+  .font1 {
+    font-size: 30px;
+  }
+}
+
 .font2 {
   margin-top: -5%;
   color: black;
   font: 30px Arial, sans-serif;
 }
+@media (max-width: 768px) {
+  .font2 {
+    margin-top: -5%;
+    font: 20px Arial, sans-serif;
+  }
+}
+
 .textFiled {
   margin-top: 2%;
 }
+@media (max-width: 768px) {
+  .textFiled {
+    margin-top: 10%;
+    padding: 10px;
+    margin-left: 5%;
+  }
+}
+
 .inputEmail {
-  width: fit-content;
+  width: 260px;
+  padding: 10px;
 }
+@media (max-width: 768px) {
+  .inputEmail {
+    width: 70%;
+    margin-left: 5%;
+    height: 5px;
+  }
+}
+
 .inputPass {
-  width: 100%;
-  margin-top: 5%;
+  width: 300px;
+  padding: 10px;
 }
-.textWidth {
-  width: 90%;
+@media (max-width: 768px) {
+  .inputPass {
+    width: 66%;
+    margin-left: 10%;
+    height: 10px;
+  }
 }
+
 .errorMessage {
   color: #e92a44;
 }
-.links {
-  display: flex;
-  justify-content: space-between;
-  font-size: x-large;
-  color: rgb(4, 4, 253);
-}
+
 .forgetText {
-  flex-direction: row-reverse;
-  margin-left: 20px;
+  font-size: 25px;
+  margin-left: 130px;
+  margin-top: -57px;
 }
+@media (max-width: 768px) {
+  .forgetText {
+    margin-left: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+}
+
+.regLink {
+  font-size: 25px;
+}
+@media (max-width: 768px) {
+  .regLink {
+    margin-left: 15px;
+    font-size: 20px;
+  }
+}
+
 .loginbtn {
   height: 40px;
-  width: 50%;
+  width: 285px;
+  border: none;
   background-color: rgb(39, 103, 206);
-  border-color: #dadce0;
   color: aliceblue;
   font-size: 20px;
+  margin-top: 10px;
 }
-// @media screen and (max-width: 600px) {
-//   .loginCard {
-//     border: none;
-//   }
-// }
+@media (max-width: 768px) {
+  .loginbtn {
+    height: 30px;
+    width: 185px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: 5%;
+  }
+}
+
+.button {
+  height: 30px;
+  width: 100%;
+  margin-left: 50%;
+}
+@media (max-width: 768px) {
+  .button {
+    margin-top: 5%;
+    height: 20px;
+    width: 420px;
+    font-size: 50px;
+    margin-left: 430px;
+  }
+}
