@@ -8,6 +8,7 @@ class UserService{
     }
 
     login(data){
+        console.log('data', data)
        let url = process.env.REACT_APP_BASE_URL + "/user/login";
        return this.axios_service.post(url, data);
     }

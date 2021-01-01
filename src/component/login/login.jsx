@@ -66,9 +66,10 @@ export default class Login extends React.Component {
       password: this.state.password,
       cartId: "",
     };
+    console.log('userdata', userData)
     if ( 
-      this.state.formErrors.errorEmail === "" ||
-      this.state.formErrors.errorPassword === ""
+      this.state.email === "" &&
+      this.state.password === ""
     ) {
       console.log("Input Fields are not properly filled");
       this.setState({
@@ -108,7 +109,7 @@ export default class Login extends React.Component {
           <h5>Sign In</h5>
         </div>
         <div className="font2">
-          <h7>Continue to Fundoo</h7>
+          <h6>Continue to Fundoo</h6>
         </div>
         <div className="textFiled">
           <div>
