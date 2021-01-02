@@ -28,5 +28,10 @@ class UserService{
         return this.axios_service.post(url, data);
     }
 
+    addNote(data){
+        let url = process.env.REACT_APP_BASE_URL + '/notes/addNotes';
+        return this.axios_service.post(url, data);
+    }
+
 }
 export default new UserService();

@@ -23,9 +23,11 @@ import {
   DeleteOutlined,
   SnippetsOutlined,
   EditOutlined,
-  NotificationOutlined
+  NotificationOutlined,
 } from "@ant-design/icons";
 import "../toolbar/toolbar.scss";
+import CreateNote from '../createnote/createnote';
+import DisplayNote from '../displaynote/displaynote'
 
 const drawerWidth = 240;
 
@@ -69,9 +71,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  listIcon:{
-    display: 'flex',
-    flexDirection: 'column'
+  listIcon: {
+    display: "flex",
+    flexDirection: "column",
   },
   inputRoot: {
     color: "inherit",
@@ -150,7 +152,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-end",
     backgroundColor: "white",
-    color:'#646868',
+    color: "#646868",
     padding: theme.spacing(0, 1),
     paddingLeft: "16px",
     // necessary for content to be below app bar
@@ -185,7 +187,7 @@ export default function MiniDrawer() {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleDrawerClose= () => {
+  const handleDrawerClose = () => {
     setOpen(false);
   };
 
@@ -290,35 +292,47 @@ export default function MiniDrawer() {
         }}
       >
         <div className={classes.toolbar}></div>
-        <List
-          onMouseEnter={handleDrawerOpen}
-          onMouseLeave={handleDrawerClose}>
-          <ListItem button key={'Notes'} className="notes">
+        <List onMouseEnter={handleDrawerOpen} onMouseLeave={handleDrawerClose}>
+          <ListItem button key={"Notes"} className="notes">
             <ListItemIcon>
-            <SnippetsOutlined />
+              <SnippetsOutlined />
             </ListItemIcon>
-            <ListItemText primary={'Notes'}/>
+            <ListItemText primary={"Notes"} />
           </ListItem>
-          <ListItem button key={'Remainders'} className="remainder">
-            <ListItemIcon><NotificationOutlined /></ListItemIcon>
-            <ListItemText primary={'Remainders'}/>
+          <ListItem button key={"Remainders"} className="remainder">
+            <ListItemIcon>
+              <NotificationOutlined />
+            </ListItemIcon>
+            <ListItemText primary={"Remainders"} />
           </ListItem>
-          <ListItem button key={'Editlabels'} className="editlabels">
-            <ListItemIcon><EditOutlined /></ListItemIcon>
-            <ListItemText primary={'Edit labels'}/>
+          <ListItem button key={"Editlabels"} className="editlabels">
+            <ListItemIcon>
+              <EditOutlined />
+            </ListItemIcon>
+            <ListItemText primary={"Edit labels"} />
           </ListItem>
-          <ListItem button key={'Archive'} className="archive">
-            <ListItemIcon><DropboxOutlined /></ListItemIcon>
-            <ListItemText primary={'Archive'}/>
+          <ListItem button key={"Archive"} className="archive">
+            <ListItemIcon>
+              <DropboxOutlined />
+            </ListItemIcon>
+            <ListItemText primary={"Archive"} />
           </ListItem>
-          <ListItem button key={'Trash'} className="trash">
-            <ListItemIcon><DeleteOutlined /></ListItemIcon>
-            <ListItemText primary={'Trash'}/>
+          <ListItem button key={"Trash"} className="trash">
+            <ListItemIcon>
+              <DeleteOutlined />
+            </ListItemIcon>
+            <ListItemText primary={"Trash"} />
           </ListItem>
         </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <div>
+          <CreateNote/>
+          <div className="note-display-div">
+          <DisplayNote/>
+          </div>
+        </div>
       </main>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Input, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Redirect ,Link } from 'react-router-dom';
 
 import "./login.scss";
 import UserService from "../../services/userService";
@@ -84,6 +84,7 @@ export default class Login extends React.Component {
           snackbarStatus: true,
           text: "Login successfully",
         });
+        return <Redirect to="/dashboard"></Redirect>
       }).catch((error) => {
         console.log("Invalid Entry",error);
         this.setState({
