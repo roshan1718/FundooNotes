@@ -6,9 +6,12 @@ import ResetPassword from "./component/resetPassword/resetPassword";
 
 import {Route, Switch} from 'react-router-dom';
 import Dashboard from './component/dashboard/dashboard';
+import {Provider} from 'react-redux';
+import store from './services/redux/store/store'
 
 function App() {
   return (
+    <Provider store={store}>
     <div className="App">
       <Switch>
         <>
@@ -20,6 +23,9 @@ function App() {
         </>
       </Switch>
     </div>
+    </Provider>
+
+
   );
 }
 

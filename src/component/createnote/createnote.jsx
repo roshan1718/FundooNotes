@@ -107,7 +107,6 @@ export default class CreateNote extends React.Component {
                 multiline
                 inputProps={{ "aria-label": "naked" }}
               />
-              {/* <input className="text-input" placeholder="Take a note.." type="text"/> */}
               <div className="position">
                 <Icons/>
               </div>

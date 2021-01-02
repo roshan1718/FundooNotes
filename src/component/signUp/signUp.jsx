@@ -22,7 +22,6 @@ export default class Login extends React.Component {
         errorPassword: "",
         errorConfirmPassword: "",
       },
-      flag: 0,
       snackbarStatus: false,
       text: "",
     };
@@ -93,12 +92,10 @@ export default class Login extends React.Component {
       service: "advance",
     };
     if (
-      this.state.flag === 1 ||
-      this.state.formErrors.errorFirstName === "" ||
-      this.state.formErrors.errorLastName === "" ||
-      this.state.formErrors.errorEmail === "" ||
-      this.state.formErrors.errorPassword === "" ||
-      this.state.formErrors.errorConfirmPassword === ""
+      this.state.firstName === "" &&
+      this.state.lastName === "" &&
+      this.state.email === "" &&
+      this.state.password === "" 
     ) {
       this.setState({
         snackbarStatus: true,
