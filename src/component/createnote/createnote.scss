@@ -63,4 +63,18 @@
     position: relative;
     left: 240px;
     cursor: pointer;
+}
+.position{
+    position: relative;
+    top: 25px;
+    width: 250px;
+}
+@media(max-width:600px){
+    .take-note{
+        width: 100%;
+    }
+    .position{
+        right: 250px;
+    }
 } 
+

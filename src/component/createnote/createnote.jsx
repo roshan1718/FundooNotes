@@ -8,6 +8,8 @@ import {
   CheckCircleOutlined,
   PushpinOutlined,
 } from "@ant-design/icons";
+import Icons from '../icons/icons';
+
 export default class CreateNote extends React.Component {
   constructor() {
     super();
@@ -106,6 +108,9 @@ export default class CreateNote extends React.Component {
                 inputProps={{ "aria-label": "naked" }}
               />
               {/* <input className="text-input" placeholder="Take a note.." type="text"/> */}
+              <div className="position">
+                <Icons/>
+              </div>
             </div>
             <div className="close">
               <div onClick={this.handleNoteclose}>close</div>
