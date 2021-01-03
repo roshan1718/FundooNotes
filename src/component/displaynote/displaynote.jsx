@@ -1,52 +1,41 @@
 import React from "react";
 import "../displaynote/displaynote.scss";
-import Note from "./note";
-import user_service from "../../services/userService";
+import Icons from "../icons/icons";
+import pin from "../../assets/pinn.svg";
+import TrashIcons from "../icons/trashicon";
 
-export default class DisplayNote extends React.Component {
-  constructor() {
-    super();
-    this.getAllNotes();
-    this.state = {
-      notes: [],
-    };
-    console.log("notes :", this.state.notes);
-  }
+export default function Note(props) {
+  console.log("props", props);
 
-  getAllNotes = () => {
-    user_service
-      .getAllNotes()
-      .then((data) => {
-        console.log("All Notes", data.data.data);
-
-        this.setState(
-          {
-            notes: data.data.data.data,
-          },
-          () => console.log("All Notes call", this.state.notes)
-        );
-      })
-      .catch((error) => {});
+  const selectIcon = (props) => {
+    switch (props) {
+      case !props.value.isDeleted:
+        return <Icons val={props.value} />;
+      case props.value.isDeleted:
+        return <TrashIcons val={props.value} />;
+      default:
+        return <Icons val={props.value} />;
+    }
   };
 
-  note = (val) => {
-    return <Note value={val} />;
-  };
-
-  componentDidMount = () => {
-    this.getAllNotes();
-  };
-
-  render() {
-    return (
-      <div className="note-position">
-        {this.state.notes
-          .filter((element) => {
-            return element.isArchived === false && element.isDeleted === false;
-          })
-          .reverse()
-          .map(this.note)}
+  return (
+    <div className="note-display">
+      <div>
+        <div className="title-pinn">
+          <div className="title-note">
+            {props.value.title}
+          </div>
+          <img className="pinn" src={pin} alt="" />
+        </div>
+        <div className="description-note">
+          {props.value.description}
+        </div>
       </div>
-    );
-  }
+      <div className="icon">
+        <div className="icon">
+          {selectIcon(props)}
+        </div>
+      </div>
+    </div>
+  );
 }
