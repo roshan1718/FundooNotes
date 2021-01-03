@@ -4,7 +4,7 @@ import SignUp from './component/signUp/signUp';
 import ForgetPassword from "./component/forgetPassword/forgetPassword";
 import ResetPassword from "./component/resetPassword/resetPassword";
 
-import {Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Dashboard from './component/dashboard/dashboard';
 import {Provider} from 'react-redux';
 import store from './services/redux/store/store'
@@ -12,6 +12,7 @@ import store from './services/redux/store/store'
 function App() {
   return (
     <Provider store={store}>
+    <BrowserRouter>
     <div className="App">
       <Switch>
         <>
@@ -23,6 +24,7 @@ function App() {
         </>
       </Switch>
     </div>
+    </BrowserRouter>
     </Provider>
 
 

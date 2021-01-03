@@ -3,6 +3,7 @@
     justify-content: center;
     // border: 1px solid black;
     width: 100%;
+    padding-bottom: 5px;
 }
 .take-note{
     display: flex;
@@ -78,3 +79,12 @@
     }
 } 
 
+.title-pin{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.pin{
+    width:25px;
+    cursor: pointer;
+} 

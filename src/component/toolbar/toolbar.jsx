@@ -28,6 +28,7 @@ import {
 import "../toolbar/toolbar.scss";
 import CreateNote from '../createnote/createnote';
 import DisplayNote from '../displaynote/displaynote'
+import {Link} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -294,9 +295,11 @@ export default function MiniDrawer() {
         <div className={classes.toolbar}></div>
         <List onMouseEnter={handleDrawerOpen} onMouseLeave={handleDrawerClose}>
           <ListItem button key={"Notes"} className="notes">
+          <Link to="/dashboard">
             <ListItemIcon>
               <SnippetsOutlined />
             </ListItemIcon>
+          </Link>
             <ListItemText primary={"Notes"} />
           </ListItem>
           <ListItem button key={"Remainders"} className="remainder">
@@ -318,9 +321,11 @@ export default function MiniDrawer() {
             <ListItemText primary={"Archive"} />
           </ListItem>
           <ListItem button key={"Trash"} className="trash">
+          <Link to="/dashboard/trash">
             <ListItemIcon>
               <DeleteOutlined />
             </ListItemIcon>
+          </Link>
             <ListItemText primary={"Trash"} />
           </ListItem>
         </List>

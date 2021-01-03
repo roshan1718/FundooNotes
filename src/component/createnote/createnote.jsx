@@ -6,9 +6,9 @@ import {
   HighlightOutlined,
   FileImageOutlined,
   CheckCircleOutlined,
-  PushpinOutlined,
 } from "@ant-design/icons";
 import Icons from '../icons/icons';
+import pin from '../../assets/pinn.svg';
 
 export default class CreateNote extends React.Component {
   constructor() {
@@ -53,7 +53,11 @@ export default class CreateNote extends React.Component {
         );
       })
       .catch((error) => {
-        console.log("error", error);
+        console.log("error",error)
+        this.setState({
+            open:true
+        },() => {console.log(this.state);});
+        console.log("error",error);
       });
   };
 
@@ -89,7 +93,7 @@ export default class CreateNote extends React.Component {
         ) : (
           <div className="take-note take-note-expand">
             <div className="take-note-input">
-              <div>
+              <div className="title-pin">
                 <TextField
                   className="title-input"
                   name="title"
@@ -97,7 +101,7 @@ export default class CreateNote extends React.Component {
                   placeholder="Title"
                   multiline
                 />
-                <PushpinOutlined />
+                <img className="pin" src={pin} alt=""/>
               </div>
               <TextField
                 className="text-input"

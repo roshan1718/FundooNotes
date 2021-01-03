@@ -3,7 +3,6 @@ import "../displaynote/displaynote.scss";
 import Note from "./note";
 import user_service from "../../services/userService";
 
-
 export default class DisplayNote extends React.Component {
   constructor() {
     super();
@@ -31,16 +30,23 @@ export default class DisplayNote extends React.Component {
   };
 
   note = (val) => {
-    return <Note title={val.title} description={val.description} />;
+    return <Note value={val} />;
+  };
+
+  componentDidMount = () => {
+    this.getAllNotes();
   };
 
   render() {
-    console.log("note title", this.state.notes.title);
-    console.log("note Description", this.state.notes.title);
     return (
-    <div className="note-position">
-        {this.state.notes.map(this.note)}
-    </div>
+      <div className="note-position">
+        {this.state.notes
+          .filter((element) => {
+            return element.isArchived === false && element.isDeleted === false;
+          })
+          .reverse()
+          .map(this.note)}
+      </div>
     );
   }
 }
