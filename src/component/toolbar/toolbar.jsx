@@ -19,7 +19,7 @@ import {
   MenuOutlined,
   MoreOutlined,
   SearchOutlined,
-  DropboxOutlined,
+  VerticalAlignBottomOutlined,
   DeleteOutlined,
   SnippetsOutlined,
   EditOutlined,
@@ -28,9 +28,9 @@ import {
 import "../toolbar/toolbar.scss";
 import { ProtectedRoute } from "../../services/auth/protected";
 import { Link, Switch } from "react-router-dom";
-import Note from '../notebox/notebox';
-import Trash from '../trash/trash';
-
+import Trash from "../trash/trash";
+import NoteBox from "../notebox/notebox";
+import Archive from "../archive/archive";
 
 const drawerWidth = 240;
 
@@ -131,6 +131,9 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: "nowrap",
+    "& .MuiDrawer-paperAnchorDockedLeft": {
+      borderRight: "none",
+    },
   },
   drawerOpen: {
     width: drawerWidth,
@@ -164,6 +167,13 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+  },
+  link: {
+    textDecoration: "none",
+    color: "#707070",
+  },
+  sideIcon: {
+    borderRadius: "20px",
   },
 }));
 
@@ -296,48 +306,51 @@ export default function MiniDrawer() {
       >
         <div className={classes.toolbar}></div>
         <List onMouseEnter={handleDrawerOpen} onMouseLeave={handleDrawerClose}>
-          <ListItem button key={"Notes"} className="notes">
-            <Link to="/dashboard">
+          <Link to="/dashboard" className={classes.link}>
+            <ListItem button key={"Notes"} className={classes.sideIcon}>
               <ListItemIcon>
                 <SnippetsOutlined />
               </ListItemIcon>
-            </Link>
-            <ListItemText primary={"Notes"} />
-          </ListItem>
-          <ListItem button key={"Remainders"} className="remainder">
+              <ListItemText primary={"Notes"} />
+            </ListItem>
+          </Link>
+          <ListItem button key={"Remainders"} className={classes.sideIcon}>
             <ListItemIcon>
               <NotificationOutlined />
             </ListItemIcon>
             <ListItemText primary={"Remainders"} />
           </ListItem>
-          <ListItem button key={"Editlabels"} className="editlabels">
+          <ListItem button key={"Editlabels"} className={classes.sideIcon}>
             <ListItemIcon>
               <EditOutlined />
             </ListItemIcon>
             <ListItemText primary={"Edit labels"} />
           </ListItem>
-          <ListItem button key={"Archive"} className="archive">
-            <ListItemIcon>
-              <DropboxOutlined />
-            </ListItemIcon>
-            <ListItemText primary={"Archive"} />
-          </ListItem>
-          <ListItem button key={"Trash"} className="trash">
-            <Link to="/dashboard/trash">
+          <Link to="/dashboard/archive" className={classes.link}>
+            <ListItem button key={"Archive"} className={classes.sideIcon}>
+              <ListItemIcon>
+                <VerticalAlignBottomOutlined />
+              </ListItemIcon>
+              <ListItemText primary={"Archive"} />
+            </ListItem>
+          </Link>
+          <Link to="/dashboard/trash" className={classes.link}>
+            <ListItem button key={"Trash"} className={classes.sideIcon}>
               <ListItemIcon>
                 <DeleteOutlined />
               </ListItemIcon>
-            </Link>
-            <ListItemText primary={"Trash"} />
-          </ListItem>
+              <ListItemText primary={"Trash"} />
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <div>
           <Switch>
-            <ProtectedRoute exact path={"/dashboard"} component={Note} />
+            <ProtectedRoute exact path={"/dashboard"} component={NoteBox} />
             <ProtectedRoute exact path={"/dashboard/trash"} component={Trash} />
+            <ProtectedRoute exact path={"/dashboard/archive"} component={Archive}/>
           </Switch>
         </div>
       </main>

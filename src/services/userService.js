@@ -47,21 +47,29 @@ class UserService{
         let url = process.env.REACT_APP_BASE_URL +'/notes/archiveNotes';
         return this.axios_service.post(url,data);
     }
+
     getTrashNotes() 
     {
         let url = process.env.REACT_APP_BASE_URL +'/notes/getTrashNotesList';
         return this.axios_service.Get(url);
     }
+
     updateNote(data) 
     {
         let url = process.env.REACT_APP_BASE_URL +'/notes/updateNotes';
         return this.axios_service.post(url,data);
     }
+
     deleteNotePermanent(data) 
     {
         let url = process.env.REACT_APP_BASE_URL +'/notes/deleteForeverNotes';
         return this.axios_service.post(url,data);
     }
-
+    
+    getArchiveNotes() 
+    {
+        let url = process.env.REACT_APP_BASE_URL +'/notes/getArchiveNotesList';
+        return this.axios_service.Get(url);
+    }
 }
 export default new UserService();

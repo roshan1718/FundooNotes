@@ -3,11 +3,12 @@ import "../icons/icon.scss";
 import { StylesProvider } from "@material-ui/core/styles";
 import {
   AlertOutlined,
-  DropboxOutlined,
+  VerticalAlignBottomOutlined,
   FileImageOutlined,
   SlackSquareOutlined,
   UserAddOutlined,
-  MoreOutlined
+  MoreOutlined,
+  ToTopOutlined,
 } from "@ant-design/icons";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -18,6 +19,7 @@ export default class Icons extends React.Component {
     super(props);
     this.state = {
       anchorEl: null,
+      archive: false,
     };
   }
 
@@ -65,6 +67,39 @@ export default class Icons extends React.Component {
     console.log("Archive", Data);
   };
 
+  onUnArchive = () => {
+    let Data = {
+      noteIdList: [this.props.val.id],
+      isArchived: false,
+    };
+    user_service
+      .archiveNote(Data)
+      .then((data) => {
+        console.log("Archive Note", data);
+      })
+      .catch((error) => {
+        console.log("Archive error", error);
+      });
+    console.log("Archive", Data);
+  };
+
+  selectIcon = (props) => {
+    switch (props) {
+      case !props.val.isArchived:
+        return (
+          <VerticalAlignBottomOutlined onClick={this.onArchive} className="icon-size" />
+        );
+      case props.val.isArchived:
+        return (
+          <ToTopOutlined onClick={this.onUnArchive} className="icon-size" />
+        );
+      default:
+        return (
+          <VerticalAlignBottomOutlined onClick={this.onArchive} className="icon-size" />
+        );
+    }
+  };
+
   render = () => {
     return (
       <StylesProvider injectFirst>
@@ -82,11 +117,16 @@ export default class Icons extends React.Component {
             <FileImageOutlined className="icon-size" />
           </div>
           <div className="note-icons-hover">
-            <DropboxOutlined className="icon-size" onClick={this.onArchive} />
+            {this.state.archive === false ||
+            this.props.val.isArchived === false ? (
+              <VerticalAlignBottomOutlined  onClick={this.onArchive} className="icon-size" />
+            ) : (
+              <ToTopOutlined onClick={this.onUnArchive} className="icon-size" />
+            )}{" "}
           </div>
           <div>
             <div className="note-icons-hover">
-            <MoreOutlined onClick={this.handleClick} />
+              <MoreOutlined onClick={this.handleClick} />
             </div>
             <Menu
               id="simple-menu"
@@ -101,5 +141,5 @@ export default class Icons extends React.Component {
         </div>
       </StylesProvider>
     );
-  }
+  };
 }

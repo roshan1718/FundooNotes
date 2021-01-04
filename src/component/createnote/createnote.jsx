@@ -10,10 +10,10 @@ import {
 import Icons from '../icons/icons';
 import pin from '../../assets/pinn.svg';
 
+
 export default class CreateNote extends React.Component {
   constructor() {
     super();
-
     this.state = {
       open: true,
       title: "",
@@ -104,7 +104,7 @@ export default class CreateNote extends React.Component {
                 <img className="pin" src={pin} alt=""/>
               </div>
               <TextField
-                className="text-input"
+                className="title-input"
                 name="note"
                 onChange={this.handleInput}
                 placeholder="Take a note.."

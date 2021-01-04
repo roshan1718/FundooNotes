@@ -4,7 +4,7 @@ import Icons from "../icons/icons";
 import pin from "../../assets/pinn.svg";
 import TrashIcons from "../icons/trashicon";
 
-export default function Note(props) {
+export default function DisplayNote(props) {
   console.log("props", props);
 
   const selectIcon = (props) => {
