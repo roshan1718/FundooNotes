@@ -31,6 +31,8 @@ import { Link, Switch } from "react-router-dom";
 import Trash from "../trash/trash";
 import NoteBox from "../notebox/notebox";
 import Archive from "../archive/archive";
+import Popover from '../toolbar/poppover';
+
 
 const drawerWidth = 240;
 
@@ -88,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "57ch",
+      width: "53ch",
     },
   },
   sectionDesktop: {
@@ -150,7 +152,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: "hidden",
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9) + 1,
+      width: theme.spacing(7) + 1,
     },
   },
   toolbar: {
@@ -174,6 +176,9 @@ const useStyles = makeStyles((theme) => ({
   },
   sideIcon: {
     borderRadius: "20px",
+    "&:focus": {
+      backgroundColor: '#FEEFC3'
+    }
   },
 }));
 
@@ -208,27 +213,7 @@ export default function MiniDrawer() {
   const mobileMenuId = "primary-search-account-menu-mobile";
 
   const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <TrademarkOutlined />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
+    <TrademarkOutlined />
   );
 
   return (
@@ -267,16 +252,7 @@ export default function MiniDrawer() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <TrademarkOutlined />
-            </IconButton>
+          <Popover/>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -286,8 +262,8 @@ export default function MiniDrawer() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreOutlined />
-            </IconButton>
+           <TrademarkOutlined /> 
+        </IconButton>
           </div>
         </Toolbar>
       </AppBar>

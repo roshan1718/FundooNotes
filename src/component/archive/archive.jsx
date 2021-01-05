@@ -28,7 +28,7 @@ export default class Archive extends React.Component {
   };
 
   note = (val) => {
-    return <DisplayNote value={val} />;
+    return <DisplayNote value={val} flag={true}/>;
   };
 
   render() {

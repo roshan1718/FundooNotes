@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import "../displaynote/displaynote.scss";
 import DisplayNote from "./displaynote";
 import user_service from "../../services/userService";
 
-export default class Note extends React.Component {
+export default class Note extends Component {
   constructor() {
     super();
     this.getAllNotes();
@@ -30,7 +30,7 @@ export default class Note extends React.Component {
   };
 
   note = (val) => {
-    console.log("note",val)
+    console.log("note", val);
     return <DisplayNote value={val} />;
   };
 
@@ -39,7 +39,11 @@ export default class Note extends React.Component {
       <div className="note-position">
         {this.state.notes
           .filter((element) => {
-            return element.isArchived === false && element.isDeleted === false;
+            return (
+              element.isArchived === false &&
+              element.isDeleted === false &&
+              element.isPined === false
+            );
           })
           .reverse()
           .map(this.note)}

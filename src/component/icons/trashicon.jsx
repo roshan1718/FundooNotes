@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import {
     DeleteOutlined,
     RestOutlined
@@ -7,7 +7,7 @@ import "./icon.scss";
 import user_service from "../../services/userService";
 
 
-export default class TrashIcons extends React.Component {
+export default class TrashIcons extends Component {
 
   onRestore = () => {
     let Data = {
@@ -18,6 +18,7 @@ export default class TrashIcons extends React.Component {
       .deleteNote(Data)
       .then((data) => {
         console.log("Restore Note", data);
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log("Restore error", error);
@@ -33,6 +34,7 @@ export default class TrashIcons extends React.Component {
       .deleteNotePermanent(Data)
       .then((data) => {
         console.log("Delete Note", data);
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log("Delete error", error);

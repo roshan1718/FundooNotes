@@ -1,8 +1,8 @@
-import React from "react";
+import React, {Component} from "react";
 import DisplayNote from "../displaynote/displaynote";
 import user_service from "../../services/userService";
 
-export default class Trash extends React.Component {
+export default class Trash extends Component {
   constructor() {
     super();
     this.getAllTrashNotes();

@@ -1,10 +1,10 @@
-import React from "react";
+import React, {Component} from "react";
 import "./resetPassword.scss";
 import { Input, Button } from "antd";
 import UserService from "../../services/userService";
 import Snackbar from "../snackbar/snackbar";
 
-export default class resetPassword extends React.Component {
+export default class resetPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {

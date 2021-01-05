@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component}from "react";
 import { Link } from "react-router-dom";
 import { Input, Button, Form } from "antd";
 
@@ -6,7 +6,7 @@ import "../signUp/signUp.scss";
 import UserService from "../../services/userService";
 import Snackbar from "../snackbar/snackbar";
 
-export default class Login extends React.Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {

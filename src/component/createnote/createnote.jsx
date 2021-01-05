@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import TextField from "@material-ui/core/TextField";
 import user_service from "../../services/userService";
 import "../createnote/createnote.scss";
@@ -11,13 +11,14 @@ import Icons from '../icons/icons';
 import pin from '../../assets/pinn.svg';
 
 
-export default class CreateNote extends React.Component {
+export default class CreateNote extends Component {
   constructor() {
     super();
     this.state = {
       open: true,
       title: "",
       note: "",
+      responce:false
     };
   }
 
@@ -46,6 +47,7 @@ export default class CreateNote extends React.Component {
             open: true,
             title: "",
             note: "",
+            reponce:true
           },
           () => {
             console.log(this.state);
@@ -112,7 +114,7 @@ export default class CreateNote extends React.Component {
                 inputProps={{ "aria-label": "naked" }}
               />
               <div className="position">
-                <Icons/>
+              <Icons val={{color:'#ffffff'}} archive={false}/>              
               </div>
             </div>
             <div className="close">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import { Input, Button } from "antd";
 import { Link } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import UserService from "../../services/userService";
 import Snackbar from "../snackbar/snackbar";
 
 
-export default class Login extends React.Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,6 +80,9 @@ export default class Login extends React.Component {
       UserService.login(userData).then((data) => {
         console.log(data);
         localStorage.setItem('token', data.data.id)
+        localStorage.setItem('email', data.data.email);
+        localStorage.setItem('first', data.data.firstName);
+        localStorage.setItem('last', data.data.lastName);
         this.setState({
           snackbarStatus: true,
           text: "Login successfully",

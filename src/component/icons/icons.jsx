@@ -1,11 +1,10 @@
-import React from "react";
+import React, {Component} from "react";
 import "../icons/icon.scss";
 import { StylesProvider } from "@material-ui/core/styles";
 import {
   AlertOutlined,
   VerticalAlignBottomOutlined,
   FileImageOutlined,
-  SlackSquareOutlined,
   UserAddOutlined,
   MoreOutlined,
   ToTopOutlined,
@@ -13,13 +12,14 @@ import {
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import user_service from "../../services/userService";
+import Popper from '../icons/popper';
 
-export default class Icons extends React.Component {
+
+export default class Icons extends Component {
   constructor(props) {
     super(props);
     this.state = {
       anchorEl: null,
-      archive: false,
     };
   }
 
@@ -44,6 +44,7 @@ export default class Icons extends React.Component {
       .deleteNote(Data)
       .then((data) => {
         console.log("Delete Note", data);
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log("Delete error", error);
@@ -60,6 +61,7 @@ export default class Icons extends React.Component {
       .archiveNote(Data)
       .then((data) => {
         console.log("Archive Note", data);
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log("Archive error", error);
@@ -76,6 +78,7 @@ export default class Icons extends React.Component {
       .archiveNote(Data)
       .then((data) => {
         console.log("Archive Note", data);
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log("Archive error", error);
@@ -83,27 +86,12 @@ export default class Icons extends React.Component {
     console.log("Archive", Data);
   };
 
-  selectIcon = (props) => {
-    switch (props) {
-      case !props.val.isArchived:
-        return (
-          <VerticalAlignBottomOutlined onClick={this.onArchive} className="icon-size" />
-        );
-      case props.val.isArchived:
-        return (
-          <ToTopOutlined onClick={this.onUnArchive} className="icon-size" />
-        );
-      default:
-        return (
-          <VerticalAlignBottomOutlined onClick={this.onArchive} className="icon-size" />
-        );
-    }
-  };
 
   render = () => {
     return (
       <StylesProvider injectFirst>
-        <div className="note-icons">
+        <div className="note-icons"style={{
+          backgroundColor: this.props.val.color}}>
           <div className="note-icons-hover">
             <AlertOutlined className="icon-size" />
           </div>
@@ -111,7 +99,7 @@ export default class Icons extends React.Component {
             <UserAddOutlined className="icon-size" />
           </div>
           <div className="note-icons-hover">
-            <SlackSquareOutlined className="icon-size" />
+            <Popper/>
           </div>
           <div className="note-icons-hover">
             <FileImageOutlined className="icon-size" />
@@ -122,7 +110,7 @@ export default class Icons extends React.Component {
               <VerticalAlignBottomOutlined  onClick={this.onArchive} className="icon-size" />
             ) : (
               <ToTopOutlined onClick={this.onUnArchive} className="icon-size" />
-            )}{" "}
+            )}
           </div>
           <div>
             <div className="note-icons-hover">
