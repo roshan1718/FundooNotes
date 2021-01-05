@@ -13,9 +13,10 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import user_service from "../../services/userService";
 import Popper from '../icons/popper';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../redux/action/action.jsx';
 
-
-export default class Icons extends Component {
+class Icons extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +45,6 @@ export default class Icons extends Component {
       .deleteNote(Data)
       .then((data) => {
         console.log("Delete Note", data);
-        window.location.reload(false);
       })
       .catch((error) => {
         console.log("Delete error", error);
@@ -61,7 +61,6 @@ export default class Icons extends Component {
       .archiveNote(Data)
       .then((data) => {
         console.log("Archive Note", data);
-        window.location.reload(false);
       })
       .catch((error) => {
         console.log("Archive error", error);
@@ -78,7 +77,6 @@ export default class Icons extends Component {
       .archiveNote(Data)
       .then((data) => {
         console.log("Archive Note", data);
-        window.location.reload(false);
       })
       .catch((error) => {
         console.log("Archive error", error);
@@ -109,7 +107,8 @@ export default class Icons extends Component {
             this.props.val.isArchived === false ? (
               <VerticalAlignBottomOutlined  onClick={this.onArchive} className="icon-size" />
             ) : (
-              <ToTopOutlined onClick={this.onUnArchive} className="icon-size" />
+              // eslint-disable-next-line no-sequences
+              <ToTopOutlined onClick={this.onUnArchive, this.props.getAllNotes} className="icon-size" />
             )}
           </div>
           <div>
@@ -123,7 +122,7 @@ export default class Icons extends Component {
               open={Boolean(this.state.anchorEl)}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.onDelete}>Delete</MenuItem>
+              <MenuItem onClick={this.onDeletes, this.props.getAllNotes}>Delete</MenuItem>
             </Menu>
           </div>
         </div>
@@ -131,3 +130,8 @@ export default class Icons extends Component {
     );
   };
 }
+const matStateToProps=(states)=>{
+  return states
+}
+
+export default connect(matStateToProps,actionCreators)(Icons);

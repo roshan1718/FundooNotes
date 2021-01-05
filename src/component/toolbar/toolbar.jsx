@@ -5,8 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Menu } from "antd";
 import clsx from "clsx";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -17,7 +15,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import {
   TrademarkOutlined,
   MenuOutlined,
-  MoreOutlined,
   SearchOutlined,
   VerticalAlignBottomOutlined,
   DeleteOutlined,

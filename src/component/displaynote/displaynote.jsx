@@ -5,9 +5,11 @@ import pin from "../../assets/pinn.svg";
 import TrashIcons from "../icons/trashicon";
 import unpin from "../../assets/unpinn.svg";
 import user_service from "../../services/userService";
+import { connect } from 'react-redux';
+import * as actionCreators from '../../redux/action/action.jsx';
 
 
-export default class DisplayNote extends Component {
+class DisplayNote extends Component {
 
   onPin = () => {
     let Data = {
@@ -73,3 +75,10 @@ export default class DisplayNote extends Component {
     );
   }
 }
+
+
+const matStateToProps=(states)=>{
+  return states
+}
+
+export default connect(matStateToProps,actionCreators)(DisplayNote);

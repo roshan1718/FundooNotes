@@ -2,32 +2,34 @@ import React, { Component } from "react";
 import "../displaynote/displaynote.scss";
 import DisplayNote from "./displaynote";
 import user_service from "../../services/userService";
+import { connect } from 'react-redux';
+import * as actionCreators from '../../redux/action/action.jsx';
 
-export default class Note extends Component {
+
+class Note extends Component {
   constructor() {
     super();
-    this.getAllNotes();
     this.state = {
       notes: [],
     };
     console.log("notes :", this.state.notes);
   }
 
-  getAllNotes = () => {
-    user_service
-      .getAllNotes()
-      .then((data) => {
-        console.log("All Notes", data.data.data);
+  // getAllNotes = () => {
+  //   user_service
+  //     .getAllNotes()
+  //     .then((data) => {
+  //       console.log("All Notes", data.data.data);
 
-        this.setState(
-          {
-            notes: data.data.data.data,
-          },
-          () => console.log("All Notes call", this.state.notes)
-        );
-      })
-      .catch((error) => {});
-  };
+  //       this.setState(
+  //         {
+  //           notes: data.data.data.data,
+  //         },
+  //         () => console.log("All Notes call", this.state.notes)
+  //       );
+  //     })
+  //     .catch((error) => {});
+  // };
 
   note = (val) => {
     console.log("note", val);
@@ -36,8 +38,9 @@ export default class Note extends Component {
 
   render() {
     return (
+      <>
       <div className="note-position">
-        {this.state.notes
+        {this.props.Notes
           .filter((element) => {
             return (
               element.isArchived === false &&
@@ -48,6 +51,14 @@ export default class Note extends Component {
           .reverse()
           .map(this.note)}
       </div>
+         <button onClick={this.props.getAllNotes}>
+         click
+     </button>
+     </>
     );
   }
 }
+const matStateToProps=(states)=>{
+  return states
+}
+export default connect(matStateToProps,actionCreators)(Note);
