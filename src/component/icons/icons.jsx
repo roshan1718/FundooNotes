@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "../icons/icon.scss";
 import { StylesProvider } from "@material-ui/core/styles";
 import {
@@ -11,10 +11,9 @@ import {
 } from "@ant-design/icons";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import user_service from "../../services/userService";
-import Popper from '../icons/popper';
-import { connect } from 'react-redux';
-import * as actionCreators from '../../redux/action/action.jsx';
+import Popper from "../icons/popper";
+import { connect } from "react-redux";
+import * as actionCreators from "../../redux/action/action.js";
 
 class Icons extends Component {
   constructor(props) {
@@ -36,60 +35,15 @@ class Icons extends Component {
     });
   };
 
-  onDelete = () => {
-    let Data = {
-      noteIdList: [this.props.val.id],
-      isDeleted: true,
-    };
-    user_service
-      .deleteNote(Data)
-      .then((data) => {
-        console.log("Delete Note", data);
-      })
-      .catch((error) => {
-        console.log("Delete error", error);
-      });
-    console.log("delete", Data);
-  };
-
-  onArchive = () => {
-    let Data = {
-      noteIdList: [this.props.val.id],
-      isArchived: true,
-    };
-    user_service
-      .archiveNote(Data)
-      .then((data) => {
-        console.log("Archive Note", data);
-      })
-      .catch((error) => {
-        console.log("Archive error", error);
-      });
-    console.log("Archive", Data);
-  };
-
-  onUnArchive = () => {
-    let Data = {
-      noteIdList: [this.props.val.id],
-      isArchived: false,
-    };
-    user_service
-      .archiveNote(Data)
-      .then((data) => {
-        console.log("Archive Note", data);
-      })
-      .catch((error) => {
-        console.log("Archive error", error);
-      });
-    console.log("Archive", Data);
-  };
-
-
   render = () => {
     return (
       <StylesProvider injectFirst>
-        <div className="note-icons"style={{
-          backgroundColor: this.props.val.color}}>
+        <div
+          className="note-icons"
+          style={{
+            backgroundColor: this.props.val.color,
+          }}
+        >
           <div className="note-icons-hover">
             <AlertOutlined className="icon-size" />
           </div>
@@ -97,7 +51,7 @@ class Icons extends Component {
             <UserAddOutlined className="icon-size" />
           </div>
           <div className="note-icons-hover">
-            <Popper/>
+            <Popper />
           </div>
           <div className="note-icons-hover">
             <FileImageOutlined className="icon-size" />
@@ -105,10 +59,19 @@ class Icons extends Component {
           <div className="note-icons-hover">
             {this.state.archive === false ||
             this.props.val.isArchived === false ? (
-              <VerticalAlignBottomOutlined  onClick={this.onArchive} className="icon-size" />
+              <VerticalAlignBottomOutlined
+                className="icon-size"
+                onClick={() => {
+                  this.props.archive();
+                }}
+              />
             ) : (
-              // eslint-disable-next-line no-sequences
-              <ToTopOutlined onClick={this.onUnArchive, this.props.getAllNotes} className="icon-size" />
+              <ToTopOutlined
+                className="icon-size"
+                onClick={() => {
+                  this.props.unarchive();
+                }}
+              />
             )}
           </div>
           <div>
@@ -122,7 +85,14 @@ class Icons extends Component {
               open={Boolean(this.state.anchorEl)}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.onDeletes, this.props.getAllNotes}>Delete</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  this.props.delete();
+                  this.handleClose();
+                }}
+              >
+                Delete
+              </MenuItem>{" "}
             </Menu>
           </div>
         </div>
@@ -130,8 +100,8 @@ class Icons extends Component {
     );
   };
 }
-const matStateToProps=(states)=>{
-  return states
-}
+const matStateToProps = (states) => {
+  return states;
+};
 
-export default connect(matStateToProps,actionCreators)(Icons);
+export default connect(matStateToProps, actionCreators)(Icons);

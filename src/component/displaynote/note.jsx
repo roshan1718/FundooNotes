@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "../displaynote/displaynote.scss";
 import DisplayNote from "./displaynote";
-import user_service from "../../services/userService";
-import { connect } from 'react-redux';
-import * as actionCreators from '../../redux/action/action.jsx';
-
+import { connect } from "react-redux";
+import { getAllNotes } from "../../redux/action/action.js";
 
 class Note extends Component {
   constructor() {
@@ -32,33 +30,29 @@ class Note extends Component {
   // };
 
   note = (val) => {
-    console.log("note", val);
-    return <DisplayNote value={val} />;
+    return <DisplayNote handleClick={this.props.getAllNotes} value={val} />;
   };
 
   render() {
     return (
       <>
-      <div className="note-position">
-        {this.props.Notes
-          .filter((element) => {
+        <div className="note-position">
+          {this.props.Notes.filter((element) => {
             return (
               element.isArchived === false &&
               element.isDeleted === false &&
               element.isPined === false
             );
           })
-          .reverse()
-          .map(this.note)}
-      </div>
-         <button onClick={this.props.getAllNotes}>
-         click
-     </button>
-     </>
+            .reverse()
+            .map(this.note)}
+        </div>
+      </>
     );
   }
 }
-const matStateToProps=(states)=>{
-  return states
-}
-export default connect(matStateToProps,actionCreators)(Note);
+const matStateToProps = (states) => {
+  return states;
+};
+
+export default connect(matStateToProps, getAllNotes)(Note);

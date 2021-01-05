@@ -1,10 +1,9 @@
-import { changeNote } from "../action/action";
 
 let defaultState = {
   Notes: [],
 };
 
-const mainReducer = (state = defaultState, action) => {
+const reducer = (state = defaultState, action) => {
   if (action.type === "CHANGE_NOTE") {
     console.log("changeNote");
     return {
@@ -19,4 +18,4 @@ const mainReducer = (state = defaultState, action) => {
   }
 };
 
-export default mainReducer;
+export default reducer

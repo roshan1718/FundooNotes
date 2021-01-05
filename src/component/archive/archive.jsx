@@ -1,8 +1,11 @@
 import React from "react";
 import DisplayNote from "../displaynote/displaynote";
 import user_service from "../../services/userService";
+import { connect } from 'react-redux';
+import * as actionCreators from '../../redux/action/action.js';
 
-export default class Archive extends React.Component {
+
+class Archive extends React.Component {
   constructor() {
     super();
     this.getAllArchiveNotes();
@@ -44,3 +47,8 @@ export default class Archive extends React.Component {
     );
   }
 }
+const matStateToProps=(states)=>{
+  return states
+}
+
+export default connect(matStateToProps,actionCreators)(Archive);
