@@ -14,6 +14,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Popper from "../icons/popper";
 import { connect } from "react-redux";
 import * as actionCreators from "../../redux/action/action.js";
+import user_service from "../../services/userService";
 
 class Icons extends Component {
   constructor(props) {
@@ -35,6 +36,22 @@ class Icons extends Component {
     });
   };
 
+  onSetColor = (color) => {
+    let Data = {
+      noteIdList: [this.props.val.id],
+      color: color.code,
+    };
+    user_service
+      .changeColor(Data)
+      .then((data) => {
+        console.log("Color Note", data);
+      })
+      .catch((error) => {
+        console.log("Color error", error);
+      });
+    console.log("Color", Data);
+  };
+
   render = () => {
     return (
       <StylesProvider injectFirst>
@@ -51,7 +68,12 @@ class Icons extends Component {
             <UserAddOutlined className="icon-size" />
           </div>
           <div className="note-icons-hover">
-            <Popper />
+            <Popper
+              putColor={(Data) => {
+                this.onSetColor(Data);
+                this.props.getAllNotes();
+              }}
+            />
           </div>
           <div className="note-icons-hover">
             <FileImageOutlined className="icon-size" />

@@ -77,5 +77,11 @@ class UserService{
         let url = process.env.REACT_APP_BASE_URL +'/notes/pinUnpinNotes';
         return this.axios_service.post(url,data);
     }
+
+    changeColor(data) 
+    {
+        let url = process.env.REACT_APP_BASE_URL +'notes/changesColorNotes';
+        return this.axios_service.post(url,data);
+    }
 }
 export default new UserService();

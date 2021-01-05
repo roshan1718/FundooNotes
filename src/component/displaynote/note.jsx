@@ -30,7 +30,7 @@ class Note extends Component {
   // };
 
   note = (val) => {
-    return <DisplayNote handleClick={this.props.getAllNotes} value={val} />;
+    return <DisplayNote value={val} />;
   };
 
   render() {
@@ -41,11 +41,24 @@ class Note extends Component {
             return (
               element.isArchived === false &&
               element.isDeleted === false &&
-              element.isPined === false
+              element.isPined === true
             );
           })
             .reverse()
             .map(this.note)}
+        </div>
+        <div className="pin-unpin">
+          <div className="note-position">
+            {this.props.Notes.filter((element) => {
+              return (
+                element.isArchived === false &&
+                element.isDeleted === false &&
+                element.isPined === false
+              );
+            })
+              .reverse()
+              .map(this.note)}
+          </div>
         </div>
       </>
     );

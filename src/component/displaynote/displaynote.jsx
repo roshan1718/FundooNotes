@@ -132,12 +132,12 @@ class DisplayNote extends Component {
         <div>
           <div className="title-pinn">
             <div className="title-note">{this.props.value.title}</div>
-            {this.props.value.isPined === false ? (
+            {this.props.value.isPined === true ? (
               <img
                 className="pinn"
                 onClick={() => {
-                  this.onPin();
-                  this.props.handleClick();
+                  this.onUnPin();
+                  this.props.getAllNotes();
                 }}
                 src={unpin}
                 alt=""
@@ -146,8 +146,8 @@ class DisplayNote extends Component {
               <img
                 className="pinn"
                 onClick={() => {
-                  this.onUnPin();
-                  this.props.handleClick();
+                  this.onPin();
+                  this.props.getAllNotes();
                 }}
                 src={pin}
                 alt=""
