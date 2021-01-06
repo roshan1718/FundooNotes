@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { DeleteOutlined, RestOutlined } from "@ant-design/icons";
 import "./icon.scss";
 
-
 export default class TrashIcons extends Component {
   render = () => {
     return (
@@ -10,7 +9,7 @@ export default class TrashIcons extends Component {
         <div className="note-icons-hover">
           <DeleteOutlined
             onClick={() => {
-              this.props.deleteRestore();
+              this.props.deletePermanent();
             }}
             className="icon-size"
           />
@@ -18,7 +17,7 @@ export default class TrashIcons extends Component {
         <div className="note-icons-hover">
           <RestOutlined
             onClick={() => {
-              this.props.deletePermanent();
+              this.props.deleteRestore();
             }}
             className="icon-size"
           />

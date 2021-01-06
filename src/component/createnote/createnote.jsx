@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import user_service from "../../services/userService";
 import "../createnote/createnote.scss";
@@ -7,18 +7,19 @@ import {
   FileImageOutlined,
   CheckCircleOutlined,
 } from "@ant-design/icons";
-import Icons from '../icons/icons';
-import pin from '../../assets/pinn.svg';
+import Icons from "../icons/icons";
+import pin from "../../assets/pinn.svg";
+import { connect } from "react-redux";
+import * as actionCreators from "../../redux/action/action.js";
 
-
-export default class CreateNote extends Component {
+class CreateNote extends Component {
   constructor() {
     super();
     this.state = {
       open: true,
       title: "",
       note: "",
-      responce:false
+      responce: false,
     };
   }
 
@@ -47,7 +48,7 @@ export default class CreateNote extends Component {
             open: true,
             title: "",
             note: "",
-            reponce:true
+            reponce: true,
           },
           () => {
             console.log(this.state);
@@ -55,11 +56,16 @@ export default class CreateNote extends Component {
         );
       })
       .catch((error) => {
-        console.log("error",error)
-        this.setState({
-            open:true
-        },() => {console.log(this.state);});
-        console.log("error",error);
+        console.log("error", error);
+        this.setState(
+          {
+            open: true,
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
+        console.log("error", error);
       });
   };
 
@@ -103,7 +109,7 @@ export default class CreateNote extends Component {
                   placeholder="Title"
                   multiline
                 />
-                <img className="pin" src={pin} alt=""/>
+                <img className="pin" src={pin} alt="" />
               </div>
               <TextField
                 className="title-input"
@@ -114,11 +120,18 @@ export default class CreateNote extends Component {
                 inputProps={{ "aria-label": "naked" }}
               />
               <div className="position">
-              <Icons val={{color:'#ffffff'}} archive={false}/>              
+                <Icons val={{ color: "#ffffff" }} archive={false} />
               </div>
             </div>
             <div className="close">
-              <div onClick={this.handleNoteclose}>close</div>
+              <div
+                onClick={() => {
+                  this.handleNoteclose();
+                  this.props.getAllNotes();
+                }}
+              >
+                close
+              </div>
             </div>
           </div>
         )}
@@ -126,3 +139,8 @@ export default class CreateNote extends Component {
     );
   }
 }
+const matStateToProps = (states) => {
+  return states;
+};
+
+export default connect(matStateToProps, actionCreators)(CreateNote);

@@ -1,34 +1,12 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import DisplayNote from "../displaynote/displaynote";
-import user_service from "../../services/userService";
-import { connect } from 'react-redux';
-import * as actionCreators from '../../redux/action/action.js';
-
+import { connect } from "react-redux";
+import { getTrashNotes } from "../../redux/action/action.js";
 
 class Trash extends Component {
   constructor() {
     super();
-    this.getAllTrashNotes();
-    this.state = {
-      notes: [],
-    };
   }
-
-  getAllTrashNotes = () => {
-    user_service
-      .getTrashNotes()
-      .then((data) => {
-        console.log("All trash Notes", data.data.data);
-
-        this.setState(
-          {
-            notes: data.data.data.data,
-          },
-          () => console.log("All trash call", this.state.notes)
-        );
-      })
-      .catch((error) => {});
-  };
 
   note = (val) => {
     return <DisplayNote value={val} />;
@@ -37,10 +15,9 @@ class Trash extends Component {
   render() {
     return (
       <div className="note-position">
-        {this.state.notes
-          .filter((element) => {
-            return element.isDeleted === true;
-          })
+        {this.props.Notes.filter((element) => {
+          return element.isDeleted === true;
+        })
           .reverse()
           .map(this.note)}
       </div>
@@ -48,8 +25,8 @@ class Trash extends Component {
   }
 }
 
-const matStateToProps=(states)=>{
-  return states
-}
+const matStateToProps = (states) => {
+  return states;
+};
 
-export default connect(matStateToProps,actionCreators)(Trash);
+export default connect(matStateToProps, getTrashNotes)(Trash);

@@ -7,27 +7,7 @@ import { getAllNotes } from "../../redux/action/action.js";
 class Note extends Component {
   constructor() {
     super();
-    this.state = {
-      notes: [],
-    };
-    console.log("notes :", this.state.notes);
   }
-
-  // getAllNotes = () => {
-  //   user_service
-  //     .getAllNotes()
-  //     .then((data) => {
-  //       console.log("All Notes", data.data.data);
-
-  //       this.setState(
-  //         {
-  //           notes: data.data.data.data,
-  //         },
-  //         () => console.log("All Notes call", this.state.notes)
-  //       );
-  //     })
-  //     .catch((error) => {});
-  // };
 
   note = (val) => {
     return <DisplayNote value={val} />;

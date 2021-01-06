@@ -79,9 +79,10 @@ export default function SimplePopper(props) {
             borderRadius: "15px",
             cursor: "pointer",
           }}
-          onClick={()=>{
+          onClick={() => {
             props.putColor(val);
-            handleClick()}}
+            handleClick();
+          }}
         ></div>
       </div>
     );
